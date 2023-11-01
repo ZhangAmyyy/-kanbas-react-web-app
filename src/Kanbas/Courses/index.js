@@ -8,12 +8,12 @@ import AssignmentEditor from "./Assignments/AssignmentEditor";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 
-function Courses() {
+function Courses({ courses }) {
   const { courseId } = useParams();
   // const location = useLocation();
   const {pathname} = useLocation();
-  const course = db.courses.find((course) => course._id === courseId);
-  const [empty, kanbas, courses, id, screen] = pathname.split("/");
+  const course = courses.find((course) => course._id === courseId);
+  const [empty, kanbas, courseName, id, screen] = pathname.split("/");
   // const links=getCourseLinks();
   // const selectedLabel = links.find(link => location.pathname.includes(link.to))?.label;
   return (

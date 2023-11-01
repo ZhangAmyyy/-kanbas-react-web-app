@@ -114,3 +114,9 @@ body {
 .wd-card-container {
   width: 25%; 
 }
+
+.todo-buttons-container button {
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+}
