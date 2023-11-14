@@ -5,6 +5,8 @@
     width: 80px;
     margin: 0px;
     min-height: 120vh;
+    height: 100vh;
+    overflow-y: auto
   }
   
   .wd-kanbas-navigation li {

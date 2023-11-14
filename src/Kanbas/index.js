@@ -88,9 +88,9 @@ function Kanbas() {
    return (
     <Provider store={store}>
 
-    <div className="wd-flex-row-container">
-      <div style={{ width: '80px'}}> <KanbasNavigation /></div>
-      <div style={{ flex: 1 }}>
+    <div className="wd-flex-row-container" style={{ height: '100vh' }} >
+      <div style={{ width: '80px', height: '100%', overflowY: 'auto' }}> <KanbasNavigation /></div>
+      <div style={{ flex: '1', overflowY: 'auto' }}>
       <Routes>
           <Route path="/" element={<Navigate to="Dashboard" />} />
           <Route path="Account" element={<h1>Account</h1>} />
