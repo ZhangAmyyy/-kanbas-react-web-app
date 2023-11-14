@@ -43,8 +43,9 @@ function Assignments() {
                 <button type="button" className="btn btn-outline-secondary btn-light">
                     <i className="fa-solid fa-plus"></i> Group
                 </button>
-                <button type="button" className="btn btn-danger">
-                  <Link to={`/Kanbas/Courses/${courseId}/Assignments/newAssignment`}>
+                <button type="button" className="btn btn-danger" >
+                  <Link to={`/Kanbas/Courses/${courseId}/Assignments/newAssignment`} style={{ color: 'white', 
+      textDecoration: 'none !important', }}>
                     <i className="fa-solid fa-plus"></i> Assignment
                     </Link>
                 </button>
