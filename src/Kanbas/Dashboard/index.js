@@ -1,9 +1,11 @@
 import db from "../Database";
 import { Link } from "react-router-dom";
-import { React, useState } from "react";
+
 function Dashboard({ courses, course, setCourse, addNewCourse,
   deleteCourse, updateCourse }
 ) {
+  
+  
   // const [courses, setCourses] = useState(db.courses);
   // const [course, setCourse] = useState({
   //   name: "New Course",      number: "New Number",
@@ -52,7 +54,7 @@ function Dashboard({ courses, course, setCourse, addNewCourse,
              onChange={(e) => setCourse({ ...course, endDate: e.target.value }) } />
 
       <br/>
-      <button style={{backgroundColor:'green'}}className="btn btn-danger" onClick={addNewCourse} >
+      <button style={{backgroundColor:'green'}}className="btn btn-danger" onClick={addNewCourse }  >
         Add
       </button>
       <button style={{backgroundColor:'blue'}}className="btn btn-danger" onClick={updateCourse} >
@@ -75,6 +77,7 @@ function Dashboard({ courses, course, setCourse, addNewCourse,
                   className="btn btn-primary"
                 >
                   {course.name}
+                  {/* {`${course.name}`}  */}
                 </Link>
                 <br/>
                 <br/>
@@ -89,7 +92,7 @@ function Dashboard({ courses, course, setCourse, addNewCourse,
             <button className="btn btn-danger"
               onClick={(event) => {
                 event.preventDefault();
-                deleteCourse(course._id);
+                deleteCourse(course);
               }}>
               Delete
             </button>

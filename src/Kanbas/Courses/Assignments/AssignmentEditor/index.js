@@ -1,22 +1,52 @@
-import React from "react";
+import { useState, useEffect } from 'react';
 import { useNavigate, useParams, Link } from "react-router-dom";
 import db from "../../../Database";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './index.css'
-
+import {
+    addAssignment, deleteAssignment, updateAssignment, setAssignment,
+    setAssignments,
+  } from "../assignmentsReducer";
+  import * as client from "../client"
+  import { useSelector, useDispatch } from "react-redux";
 
 function AssignmentEditor() {
   const { assignmentId } = useParams();
-  const assignment = db.assignments.find(
-    (assignment) => assignment._id === assignmentId);
 
-
+      const assignments = useSelector((state) => state.assignmentsReducer.assignments);
+      const assignment = assignments.find(
+        (assignment) => assignment._id === assignmentId);
+      const dispatch = useDispatch();
+    
   const { courseId } = useParams();
   const navigate = useNavigate();
-  const handleSave = () => {
-    console.log("Actually saving assignment TBD in later assignments");
-    navigate(`/Kanbas/Courses/${courseId}/Assignments`);
+  const [title, setTitle] = useState('');
+  useEffect(() => {
+    if (assignment) {
+      setTitle(assignment.title);
+    } else {
+      setTitle('New Assignment');
+    }
+  }, [assignment]);
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
   };
+
+const handleUpdateAssignment = async () => {
+    const updatedAssignment = { ...assignment, title }; 
+    if (assignmentId){
+        await client.updateAssignment(updatedAssignment);
+        dispatch(updateAssignment(updatedAssignment));
+    }else{
+        await client.createAssignment(courseId, updatedAssignment).then((newlyCreatedAssignment) => {
+            dispatch(addAssignment(newlyCreatedAssignment));
+    });
+  }
+  navigate(`/Kanbas/Courses/${courseId}/Assignments`);
+}
+
+  
+  
   return (
     <div>
          <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center" }}>
@@ -28,8 +58,18 @@ function AssignmentEditor() {
   <br />
 
       <h2>Assignment Name</h2>
-      <input value={`${assignment._id} + ${assignment.title}`} 
-             className="form-control mb-2" />
+      <input
+  value={assignment ? `${assignment._id} + ${assignment.title}` : 'New Assignment'}
+  className="form-control mb-2"
+  onChange={(e) => setAssignment((prevAssignment) => ({ ...prevAssignment, title: e.target.value }))}
+/>
+<label>Title:</label>
+      <input
+        type="text"
+        value={title}
+        onChange={handleTitleChange}
+        className="form-control mb-2"
+      />
         <div>
     <input type="text" id="input1" className="w-100" placeholder="This assignment describes how to install..." style={{ height: "100px" }} />
     <br />
@@ -154,7 +194,7 @@ function AssignmentEditor() {
             className="btn btn-secondary">
         Cancel
       </Link>
-      <button onClick={handleSave} className="btn btn-success me-2">
+      <button onClick={handleUpdateAssignment} className="btn btn-success me-2">
         Save
       </button>
     </div>
