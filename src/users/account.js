@@ -41,7 +41,7 @@ function Account() {
             onChange={(e) => setAccount({ ...account,
               lastName: e.target.value })}/>
                 <br />
-          <input value={account.dob}
+          <input type="date" value={account.dob}
             onChange={(e) => setAccount({ ...account,
               dob: e.target.value })}/>
                 <br />

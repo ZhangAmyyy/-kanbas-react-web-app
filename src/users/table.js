@@ -83,7 +83,9 @@ function UserTable() {
         </thead>
         <tbody>
           {users.map((user) => (
+           
             <tr key={user._id}>
+              {console.log(user)} 
              <Link to={`/project/account/${user._id}`}>
                
           {user.username}
