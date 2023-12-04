@@ -58,5 +58,9 @@ export const updateUser = async (user) => {
     return response.data;
   };
   
+  // export const checkAccount = async (user) => {
+  //   const response = await request.post(`${USERS_API}/account/${user._id}`);
+  //   return response.data;
+  // };
   
   
