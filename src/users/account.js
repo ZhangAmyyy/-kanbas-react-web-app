@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, Link,useParams } from "react-router-dom";
 function Account() {
     const { id } = useParams();
+    console.log(id);
   const [account, setAccount] = useState(null);
 
   const navigate = useNavigate();
